@@ -15,16 +15,16 @@ GPIO.setup(GREEN_PIN3, GPIO.OUT)
 
 # Function to control the traffic light sequence
 def traffic_light():
-    while running:
-        # Traffic Light 
-        GPIO.output(GREEN_PIN1, GPIO.HIGH)
-        time.sleep(5)  # Green light duration
+    GPIO.output(GREEN_PIN1, GPIO.HIGH)
+    time.sleep(5)  # Green light duration
 
-        GPIO.output(GREEN_PIN1, GPIO.LOW)
-        GPIO.output(GREEN_PIN2, GPIO.HIGH)
-        time.sleep(2)  # Yellow light duration
+    GPIO.output(GREEN_PIN1, GPIO.LOW)
+    GPIO.output(GREEN_PIN2, GPIO.HIGH)
+    time.sleep(2)  # Yellow light duration
 
-        GPIO.output(GREEN_PIN2, GPIO.LOW)
-        GPIO.output(GREEN_PIN3, GPIO.HIGH)
-        time.sleep(5)  # Red light duration
+    GPIO.output(GREEN_PIN2, GPIO.LOW)
+    GPIO.output(GREEN_PIN3, GPIO.HIGH)
+    time.sleep(5)  # Red light duration
+
+traffic_light()
 
