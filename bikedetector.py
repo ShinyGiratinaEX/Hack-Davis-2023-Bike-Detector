@@ -6,11 +6,11 @@ from cvlib.object_detection import draw_bbox
 from numpy.lib.polynomial import poly
 
 img = cv2.imread('bike5.png')
-img1 = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-plt.axis('off')
-plt.figure(figsize=(12,12))
-# plt.imshow(img1)
-plt.show()
+# img1 = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+# plt.axis('off')
+# plt.figure(figsize=(12,12))
+# # plt.imshow(img1)
+# plt.show()
 	
 box, label, count = cv.detect_common_objects(img, confidence = 0.3)
 bikebox = [box[i] for i in range(len(box)) if label[i] == "bicycle"]
