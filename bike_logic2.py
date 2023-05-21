@@ -82,16 +82,19 @@ while True:
             turn_green(bike_num.index(max(bike_num)))
             prev_three.append(bike_num.index(max(bike_num)))
             prev_one = bike_num.index(max(bike_num))
-        elif (bike_num.index(max([bike_num[i] for i in len(bike_num) if i != bike_num.index(max(bike_num))])) not in prev_three) and (bike_num.index(max([bike_num[i] for i in len(bike_num) if i != bike_num.index(max(bike_num))])) != prev_one):
-            turn_yellow_then_red(prev_one)
-            turn_green(bike_num.index(max([bike_num[i] for i in len(bike_num) if i != bike_num.index(max(bike_num))])))
-            prev_three.append(bike_num.index(max([bike_num[i] for i in len(bike_num) if i != bike_num.index(max(bike_num))])))
-            prev_one = bike_num.index(max([bike_num[i] for i in len(bike_num) if i != bike_num.index(max(bike_num))]))
         else:
-            turn_yellow_then_red(prev_one)
-            turn_green(bike_num.index(min(bike_num)))
-            prev_three.append(bike_num.index(min(bike_num)))
-            prev_one = bike_num.index(min(bike_num))
+            bike_num[bike_num.index(max(bike_num))] = -1
+            if (bike_num.index(max(bike_num)) not in prev_three) and (bike_num.index(max(bike_num)) != prev_one):
+                turn_yellow_then_red(prev_one)
+                turn_green(bike_num.index(max(bike_num)))
+                prev_three.append(bike_num.index(max(bike_num)))
+                prev_one = bike_num.index(max(bike_num))
+            else:
+                bike_num[bike_num.index(max(bike_num))] = -1
+                turn_yellow_then_red(prev_one)
+                turn_green(bike_num.index(max(bike_num)))
+                prev_three.append(bike_num.index(max(bike_num)))
+                prev_one = bike_num.index(max(bike_num))
             
 
         #Finds the maximum index that is not in the previous index array
