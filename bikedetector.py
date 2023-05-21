@@ -3,9 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
+import os
 
-def main():
-    img = cv2.imread('bikepics/bike5.png')
+def count_bikes():
+    img = cv2.imread('bike.png')
         
     box, label, count = cv.detect_common_objects(img, confidence = 0.3)
     bikebox = [box[i] for i in range(len(box)) if label[i] == "bicycle"]
@@ -21,4 +22,7 @@ def main():
 
     print("Number of objects in this image are " +str(len(label)))
     print("Number of bicycles in this image are " +str(len([bicycle for bicycle in label if bicycle == "bicycle"])))
+
+    os.remove("bike.png") 
+
     return len([bicycle for bicycle in label if bicycle == "bicycle"])

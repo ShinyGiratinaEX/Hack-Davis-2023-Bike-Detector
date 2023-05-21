@@ -1,12 +1,12 @@
 import cv2
 import time
 
-def main(lane):
+def picture_capture():
 
     cam = cv2.VideoCapture(0)
 
     ret, frame = cam.read()
-    img_name = "bike{}.png".format(lane)
+    img_name = "bike.png"
     cv2.imwrite(img_name, frame)
 
     cam.release()
