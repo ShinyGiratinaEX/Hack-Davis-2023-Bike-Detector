@@ -8,25 +8,29 @@ import takepicture
 
 def count_bikes():
     takepicture.picture_capture()
+    print('image captured')
     img = cv2.imread('bike.png')
-        
+    print('analyxed')
+
     box, label, count = cv.detect_common_objects(img, confidence = 0.3)
     bikebox = [box[i] for i in range(len(box)) if label[i] == "bicycle"]
     bikelabel = [label[i] for i in range(len(label)) if label[i] == "bicycle"]
     bikecount = [count[i] for i in range(len(count)) if count[i] == "bicycle"]
-    output = draw_bbox(img, bikebox, bikelabel, bikecount)
+    print(label)
+    # output = draw_bbox(img, bikebox, bikelabel, bikecount)
 
-    output = cv2.cvtColor(output,cv2.COLOR_BGR2RGB)
-    plt.figure(figsize=(12,12))
-    plt.imshow(output)
-    plt.axis('off')
-    plt.show()
+    # output = cv2.cvtColor(output,cv2.COLOR_BGR2RGB)
+    # plt.figure(figsize=(12,12))
+    # plt.imshow(output)
+    # plt.axis('off')
+    # plt.show()
 
     print("Number of objects in this image are " +str(len(label)))
     print("Number of bicycles in this image are " +str(len([bicycle for bicycle in label if bicycle == "bicycle"])))
 
-    if os.path.exists("demofile.txt"):
-        os.remove("demofile.txt")
+    if os.path.exists("bike.png"):
+        # os.remove("bike.png")
+        true = False
     else:
         print("The file does not exist") 
 
