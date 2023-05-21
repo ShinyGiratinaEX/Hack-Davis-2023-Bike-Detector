@@ -8,9 +8,7 @@ import takepicture
 
 def count_bikes():
     takepicture.picture_capture()
-    print('image captured')
     img = cv2.imread('bike.png')
-    print('analyxed')
 
     box, label, count = cv.detect_common_objects(img, confidence = 0.3)
     bikebox = [box[i] for i in range(len(box)) if label[i] == "bicycle"]
@@ -29,8 +27,7 @@ def count_bikes():
     print("Number of bicycles in this image are " +str(len([bicycle for bicycle in label if bicycle == "bicycle"])))
 
     if os.path.exists("bike.png"):
-        # os.remove("bike.png")
-        true = False
+        os.remove("bike.png")
     else:
         print("The file does not exist") 
 

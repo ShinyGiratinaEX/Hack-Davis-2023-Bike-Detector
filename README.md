@@ -11,5 +11,5 @@ matplotlib
 opencv
 numpy
 cvlib
-pip install pyfirmata
+pyfirmata
 ##
