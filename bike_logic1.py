@@ -4,8 +4,11 @@
 from pyfirmata import Arduino
 import pyfirmata
 import time
+<<<<<<< Updated upstream
 import takepicture 
 import bikedetector
+=======
+>>>>>>> Stashed changes
 """ servo pyfirmata"""
 
 board = pyfirmata.Arduino('COM3')
@@ -45,7 +48,10 @@ time.sleep(3)
 # for i in range(1,91):
 #     move_servo(i)
 move_servo(90)
+<<<<<<< Updated upstream
 x = bikedetector.count_bikes()
 print(f"We have {x} bikes in the picture.")
+=======
+>>>>>>> Stashed changes
 time.sleep(3)
 move_servo(180)
