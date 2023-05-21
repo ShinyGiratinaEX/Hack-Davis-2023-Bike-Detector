@@ -8,7 +8,7 @@ Coded entirely in Python.
 ## Required Python Modules
 
 matplotlib
-opencv
+opencv-contrib-python
 numpy
 cvlib
 pyfirmata
