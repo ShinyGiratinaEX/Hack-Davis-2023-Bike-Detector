@@ -34,8 +34,7 @@ button = board.analog[0]
 button.enable_reporting()
 
 tick = 0
-prev_max_ind = []
-reset_lights = 0
+prev_max_ind = -1
 
 #TURNS EVERYTHING INTO CRIMSON
 for i in range(len(LED_pin)):
@@ -62,30 +61,25 @@ while True:
         move_servo(0)
         
         #Finds the maximum index that is not in the previous index array
-        print(prev_max_ind)
-        for ind in range(len(bike_num)):
-            if (ind not in prev_max_ind) and (max(bike_num[0:ind+1]) == ind):
-                max_ind = ind
-                print(max(bike_num[0:ind+1]))
+        max_ind = bike_num.index(max(bike_num))
+        if max_ind == prev_max_ind:
+            temp_bike_num = bike_num
+            temp_bike_num[max_ind] = -1
+            max_ind = temp_bike_num.index(max(temp_bike_num))
 
         #Turns light yellow, then red
-        if len(prev_max_ind)>0:
-            board.digital[LED_pin[prev_max_ind[-1]][2]].write(0)
-            board.digital[LED_pin[prev_max_ind[-1]][1]].write(1)
+        if prev_max_ind>-1:
+            board.digital[LED_pin[prev_max_ind][2]].write(0)
+            board.digital[LED_pin[prev_max_ind][1]].write(1)
             time.sleep(1)
-            board.digital[LED_pin[prev_max_ind[-1]][1]].write(0)
-            board.digital[LED_pin[prev_max_ind[-1]][0]].write(1)
-        
-        #Resets prev max ind after 3 rounds
-        if reset_lights%3 == 0 and len(prev_max_ind) >0:
-            prev_max_ind =[]
+            board.digital[LED_pin[prev_max_ind][1]].write(0)
+            board.digital[LED_pin[prev_max_ind][0]].write(1)
 
         #Makes current max green 
         board.digital[LED_pin[max_ind][0]].write(0)
         board.digital[LED_pin[max_ind][2]].write(1)
         time.sleep(1)
 
-        prev_max_ind.append(max_ind)
-        reset_lights +=1
+        prev_max_ind = max_ind
          
     time.sleep(0.01)

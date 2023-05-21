@@ -8,7 +8,6 @@ def picture_capture():
     ret, frame = cam.read()
     img_name = "bike.png"
     cv2.imwrite(img_name, frame)
-
     cam.release()
 
     cv2.destroyAllWindows()
