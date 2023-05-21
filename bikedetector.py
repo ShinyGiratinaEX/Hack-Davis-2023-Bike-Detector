@@ -23,6 +23,9 @@ def count_bikes():
     print("Number of objects in this image are " +str(len(label)))
     print("Number of bicycles in this image are " +str(len([bicycle for bicycle in label if bicycle == "bicycle"])))
 
-    os.remove("bike.png") 
+    if os.path.exists("demofile.txt"):
+        os.remove("demofile.txt")
+    else:
+        print("The file does not exist") 
 
     return len([bicycle for bicycle in label if bicycle == "bicycle"])
