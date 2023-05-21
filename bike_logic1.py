@@ -6,8 +6,10 @@ import time
 
 board = pyfirmata.Arduino('COM3')
 
+i = 0
 while True:
-    board.digital[13].write(1)
+    board.digital[i%12+2].write(1)
     time.sleep(1)
-    board.digital[13].write(0)
+    board.digital[i%12+2].write(0)
     time.sleep(1)
+    i += 1
