@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
 
-img = cv2.imread('bike5.png')
+img = cv2.imread('bikepics/bike5.png')
 	
 box, label, count = cv.detect_common_objects(img, confidence = 0.3)
 bikebox = [box[i] for i in range(len(box)) if label[i] == "bicycle"]
