@@ -5,6 +5,7 @@ from pyfirmata import Arduino
 import pyfirmata
 import time
 import takepicture 
+import bikedetector
 """ servo pyfirmata"""
 
 board = pyfirmata.Arduino('COM3')
@@ -44,6 +45,7 @@ time.sleep(3)
 # for i in range(1,91):
 #     move_servo(i)
 move_servo(90)
-# takepicture.main(0)
+x = bikedetector.count_bikes()
+print(f"We have {x} bikes in the picture.")
 time.sleep(3)
 move_servo(180)

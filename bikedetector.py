@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import cvlib as cv
 from cvlib.object_detection import draw_bbox
 import os
+import takepicture
 
 def count_bikes():
+    takepicture.picture_capture()
     img = cv2.imread('bike.png')
         
     box, label, count = cv.detect_common_objects(img, confidence = 0.3)
