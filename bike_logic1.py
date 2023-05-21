@@ -34,9 +34,14 @@ button = board.analog[0]
 button.enable_reporting()
 
 tick = 0
+prev_max_ind = []
+reset_lights = 0
 
+#TURNS EVERYTHING INTO CRIMSON
+for i in range(len(LED_pin)):
+    board.digital[LED_pin[i][0]].write(1)
 while True:
-    print(tick%2)
+    #Waits for button click
     print(button.read())
     try:
         if button.read() > 0.5:
@@ -44,8 +49,11 @@ while True:
     except:
         print("Error")
     
+    #Resets number of bikes in each lane
     bike_num = []
     if tick%2 == 1:
+
+        #Creates an array of number of bikes in each lane
         for i in range(3):
             move_servo(i*90)
             x=bikedetector.count_bikes()
@@ -53,14 +61,31 @@ while True:
             print(f"We have {x} bikes in the picture.")
         move_servo(0)
         
-        max_ind = bike_num.index(max(bike_num))
+        #Finds the maximum index that is not in the previous index array
+        print(prev_max_ind)
+        for ind in range(len(bike_num)):
+            if (ind not in prev_max_ind) and (max(bike_num[0:ind+1]) == ind):
+                max_ind = ind
+                print(max(bike_num[0:ind+1]))
 
-        max_pins = LED_pin[max_ind]
-
-        for i in max_pins:
-            board.digital[i].write(1)
+        #Turns light yellow, then red
+        if len(prev_max_ind)>0:
+            board.digital[LED_pin[prev_max_ind[-1]][2]].write(0)
+            board.digital[LED_pin[prev_max_ind[-1]][1]].write(1)
             time.sleep(1)
-            board.digital[i].write(0)
-            time.sleep(1)
+            board.digital[LED_pin[prev_max_ind[-1]][1]].write(0)
+            board.digital[LED_pin[prev_max_ind[-1]][0]].write(1)
         
+        #Resets prev max ind after 3 rounds
+        if reset_lights%3 == 0 and len(prev_max_ind) >0:
+            prev_max_ind =[]
+
+        #Makes current max green 
+        board.digital[LED_pin[max_ind][0]].write(0)
+        board.digital[LED_pin[max_ind][2]].write(1)
+        time.sleep(1)
+
+        prev_max_ind.append(max_ind)
+        reset_lights +=1
+         
     time.sleep(0.01)
